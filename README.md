@@ -221,9 +221,3 @@ Dataset credit: APTOS 2019 Blindness Detection — Kaggle
 
 
 
-
-👤 Author
-
-[ABHISHEK SINGH] — VIT
-
-📧 [your-ar5621996@gmail.com]
