@@ -66,8 +66,10 @@ Fusion & Classification Head
 Feature vectors from both branches are concatenated
 Passed through a fully connected classifier:
   Linear(cnn_dim + vit_dim → 512) → ReLU → Dropout(0.4) → Linear(512 → 5)
+
 🔄 Architecture Flow
-Input Retinal Image (224×224×3)
+
+       Input Retinal Image (224×224×3)
          │
          ├─────────────────────────────────────┐
          │                                     │
@@ -83,8 +85,8 @@ Input Retinal Image (224×224×3)
  │ • Local feature  │               │   self-attention      │
  │   extraction     │               │ • Global feature      │
  │                  │               │   extraction          │
- └────────┬─────────┘               └──────────┬────────────┘
-          │                                     │
+ └────────┬─────────┘               └─────────┬────────────┘
+          │                                   │
           │  CNN Feature Vector                 │  ViT Feature Vector
           │  (cnn_dim)                          │  (vit_dim)
           │                                     │
@@ -93,8 +95,8 @@ Input Retinal Image (224×224×3)
                          ▼
               ┌─────────────────────┐
               │  Feature Concat     │
-              │  [cnn_feat, vit_feat]│
-              │  (cnn_dim + vit_dim) │
+              │ [cnn_feat, vit_feat]│
+              │ (cnn_dim + vit_dim) │
               └──────────┬──────────┘
                          │
                          ▼
@@ -124,6 +126,8 @@ Input Retinal Image (224×224×3)
               │  Output Prediction  │
               │  (0, 1, 2, 3, 4)    │
               └─────────────────────┘
+
+
 Why This Hybrid Approach?
 Feature	CNN (EfficientNet)	ViT
 Focus	Local patterns	Global context
