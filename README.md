@@ -69,63 +69,7 @@ Passed through a fully connected classifier:
 
 🔄 Architecture Flow
 
-       Input Retinal Image (224×224×3)
-         │
-         ├─────────────────────────────────────┐
-         │                                     │
-         ▼                                     ▼
- ┌──────────────────┐               ┌──────────────────────┐
- │  EfficientNet-B4 │               │   ViT-Tiny-Patch16   │
- │  (CNN Branch)    │               │   (Transformer Branch)│
- │                  │               │                       │
- │ • Compound       │               │ • Split image into    │
- │   scaling        │               │   16×16 patches       │
- │ • MBConv blocks  │               │ • Patch embeddings    │
- │ • SE attention   │               │ • Multi-head          │
- │ • Local feature  │               │   self-attention      │
- │   extraction     │               │ • Global feature      │
- │                  │               │   extraction          │
- └────────┬─────────┘               └─────────┬────────────┘
-          │                                   │
-          │  CNN Feature Vector                 │  ViT Feature Vector
-          │  (cnn_dim)                          │  (vit_dim)
-          │                                     │
-          └──────────────┬──────────────────────┘
-                         │
-                         ▼
-              ┌─────────────────────┐
-              │  Feature Concat     │
-              │ [cnn_feat, vit_feat]│
-              │ (cnn_dim + vit_dim) │
-              └──────────┬──────────┘
-                         │
-                         ▼
-              ┌─────────────────────┐
-              │  Linear Layer       │
-              │  → 512 units        │
-              └──────────┬──────────┘
-                         │
-                         ▼
-              ┌─────────────────────┐
-              │  ReLU Activation    │
-              └──────────┬──────────┘
-                         │
-                         ▼
-              ┌─────────────────────┐
-              │  Dropout (p=0.4)    │
-              └──────────┬──────────┘
-                         │
-                         ▼
-              ┌─────────────────────┐
-              │  Linear Layer       │
-              │  → 5 classes        │
-              └──────────┬──────────┘
-                         │
-                         ▼
-              ┌─────────────────────┐
-              │  Output Prediction  │
-              │  (0, 1, 2, 3, 4)    │
-              └─────────────────────┘
+     <img width="1197" height="516" alt="image" src="https://github.com/user-attachments/assets/27f02167-768e-4ce9-af93-e41c67d23925" />
 
 
 Why This Hybrid Approach?
